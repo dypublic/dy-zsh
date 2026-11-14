@@ -1,0 +1,40 @@
+name: Test installer
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Zsh on Linux
+        if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install -y zsh
+      - name: Check shell syntax
+        run: |
+          bash -n install.sh
+          zsh -f -o NO_BG_NICE -n themes/dy.zsh-theme
+      - name: Test installation behavior
+        run: python3 -m unittest discover -s tests -v
+      - name: Install with the real official Oh My Zsh
+        env:
+          ZDOTDIR: ${{ runner.temp }}/dy-shell-smoke/zdot
+          ZSH: ${{ runner.temp }}/dy-shell-smoke/oh-my-zsh
+          XDG_STATE_HOME: ${{ runner.temp }}/dy-shell-smoke/state
+        run: |
+          mkdir -p "$ZDOTDIR"
+          bash install.sh
+          bash install.sh
+          zsh -df -o NO_BG_NICE -c '
+            zstyle ":omz:update" mode disabled
+            source "$ZDOTDIR/.zshrc"
+            [[ "$ZSH_THEME" == dy && "$PROMPT" == *git_prompt_info* ]] || exit 1
+          '
