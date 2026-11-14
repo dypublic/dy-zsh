@@ -14,10 +14,7 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/dypublic/dy-zsh/main/ins
 
 - 下载 `dy` 主题到 `~/.oh-my-zsh/custom/themes/dy.zsh-theme`。
 - 将 `.zshrc` 的 `ZSH_THEME` 改为 `dy`；没有这项时，在加载 Oh My Zsh 前插入。
-- **保留现有 plugins 和其他配置。** 不替换整份 `.zshrc`，不创建 `.zshrc.local`。
 - 未安装 Oh My Zsh 时安装官方版本，不使用 sudo，也不更改默认 shell。
-
-主题显示用户名、主机名、当前目录和 Git 分支；工作区有改动时显示红色 `⚡`。
 
 ## 备份
 
