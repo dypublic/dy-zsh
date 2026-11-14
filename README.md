@@ -1,11 +1,11 @@
-# dy-shell
+# dy-zsh
 
 我的 Oh My Zsh 主题，适用于 macOS 和 Linux。直接下载必要文件，无需 fork 或 clone 本仓库。
 
 ## 安装 / 更新
 
 ```bash
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/dypublic/dy-shell/main/install.sh)"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/dypublic/dy-zsh/main/install.sh)"
 ```
 
 安装和更新使用同一条命令，完成后新开终端即可。需要 Bash、Zsh、Perl、curl；首次安装官方 Oh My Zsh 还需要 Git。
@@ -24,7 +24,7 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/dypublic/dy-shell/main/i
 修改前先检查 Zsh 语法，并将会被覆盖的已有文件备份到：
 
 ```text
-~/.local/state/dy-shell/backups/<时间>.<随机后缀>/
+~/.local/state/dy-zsh/backups/<时间>.<随机后缀>/
 ```
 
 备份目录会在安装时打印。配置已经一致时跳过，不重复备份。已有符号链接保留，更新写入目标文件。

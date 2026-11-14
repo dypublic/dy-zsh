@@ -2,12 +2,12 @@
 set -euo pipefail
 umask 077
 
-base_url='https://raw.githubusercontent.com/dypublic/dy-shell/main'
+base_url='https://raw.githubusercontent.com/dypublic/dy-zsh/main'
 zsh_dir="${ZSH:-$HOME/.oh-my-zsh}"
 custom_dir="${ZSH_CUSTOM:-$zsh_dir/custom}"
 rc="${ZDOTDIR:-$HOME}/.zshrc"
 theme="$custom_dir/themes/dy.zsh-theme"
-tmp=$(mktemp -d "${TMPDIR:-/tmp}/dy-shell.XXXXXXXX")
+tmp=$(mktemp -d "${TMPDIR:-/tmp}/dy-zsh.XXXXXXXX")
 trap 'rm -rf -- "$tmp"' EXIT
 
 fetch() {
@@ -60,7 +60,7 @@ if test -f "$rc" && cmp -s "$rc" "$tmp/zshrc"; then rc_changed=no; fi
 theme_changed=yes
 if test -f "$theme" && cmp -s "$theme" "$tmp/dy.zsh-theme"; then theme_changed=no; fi
 if test "$rc_changed" = no && test "$theme_changed" = no; then
-  printf 'dy-shell 已是最新配置，无需修改。\n'
+  printf 'dy-zsh 已是最新配置，无需修改。\n'
   exit 0
 fi
 
@@ -68,7 +68,7 @@ backup=''
 backup_file() {
   test -e "$1" || return 0
   if test -z "$backup"; then
-    local root="${XDG_STATE_HOME:-$HOME/.local/state}/dy-shell/backups"
+    local root="${XDG_STATE_HOME:-$HOME/.local/state}/dy-zsh/backups"
     mkdir -p "$root"
     backup=$(mktemp -d "$root/$(date +%Y%m%d-%H%M%S).XXXXXXXX")
     printf '备份：%s\n' "$backup"

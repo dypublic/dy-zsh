@@ -11,7 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 class InstallTests(unittest.TestCase):
     def setUp(self):
-        self.temp = tempfile.TemporaryDirectory(prefix="dy-shell-test-")
+        self.temp = tempfile.TemporaryDirectory(prefix="dy-zsh-test-")
         self.addCleanup(self.temp.cleanup)
         self.root = Path(self.temp.name)
         self.omz = self.root / "omz"
@@ -74,7 +74,7 @@ esac
         return result
 
     def backups(self):
-        return list((self.state / "dy-shell/backups").glob("*"))
+        return list((self.state / "dy-zsh/backups").glob("*"))
 
     def test_preserves_everything_but_theme_and_is_idempotent(self):
         original = self.config(
